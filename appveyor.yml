@@ -1,0 +1,49 @@
+version: 1.0.0
+init:
+  - if %APPVEYOR_REPO_TAG%==false (appveyor UpdateBuild -Version "%APPVEYOR_BUILD_VERSION%-build%APPVEYOR_BUILD_NUMBER%")
+skip_branch_with_pr: true
+image: Visual Studio 2017
+dotnet_csproj:
+  patch: true
+  file: '**\*.csproj'
+  version: '{version}'
+  package_version: '{version}'
+install:
+  - nuget restore
+nuget:
+  account_feed: true
+  project_feed: true
+  disable_publish_on_pr: true
+configuration: Release
+build:
+  parallel: true
+  publish_nuget: true
+  publish_nuget_symbols: true
+  include_nuget_references: true
+  verbosity: normal
+after_build:
+  - 7z a HawkAuthentication.zip %APPVEYOR_BUILD_FOLDER%\src\*\bin\Release\*
+artifacts:
+  - path: HawkAuthentication.zip
+    name: HawkAuthentication
+deploy:
+  - provider: NuGet
+    api_key:
+      secure: cZD/WgvVPXmCIrra1/N+WOb5QhrWBOef2ymP+QK7m+1DPvAr+KeJve0GtKe9dBQy
+    on:
+      branch: master
+  - provider: NuGet
+    api_key:
+      secure: cZD/WgvVPXmCIrra1/N+WOb5QhrWBOef2ymP+QK7m+1DPvAr+KeJve0GtKe9dBQy
+    on:
+      appveyor_repo_tag: true
+  - provider: GitHub
+    description: AppVeyor CI deployment
+    auth_token:
+      secure: 49h1/SXggw6sDLDix121vnZO1XeUqNJkKUDEwx+QdHQJzEJwO2bgRqOs6HPNDExh
+    artifact: HawkAuthentication
+    draft: false
+    prerelease: false
+    force_update: true
+    on:
+      appveyor_repo_tag: true

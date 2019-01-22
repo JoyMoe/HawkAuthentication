@@ -14,7 +14,7 @@ namespace HawkAuthentication
                 return Convert.ToBase64String(byteArray);
             }
         }
-        
+
         public static string CalculateHmac(string key, string plaintext)
         {
             using (var hash = new HMACSHA256(Encoding.UTF8.GetBytes(key)))
