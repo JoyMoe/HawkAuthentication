@@ -13,7 +13,7 @@ namespace HawkAuthentication.Client
             _credential = credential;
         }
 
-        public async Task<HttpRequestMessage> SignAsync(HttpRequestMessage request, string ext = null)
+        public async Task<HttpRequestMessage> SignAsync(HttpRequestMessage request, string contentType = null, string ext = null)
         {
             if (request == null)
             {
@@ -31,7 +31,12 @@ namespace HawkAuthentication.Client
 
             if (_credential.RequirePayloadHash)
             {
-                hash = HawkCrypto.CalculatePayloadHash("", await request.Content.ReadAsStringAsync());
+                if (string.IsNullOrWhiteSpace(contentType))
+                {
+                    throw new ArgumentNullException(nameof(contentType));
+                }
+
+                hash = HawkCrypto.CalculatePayloadHash(contentType, await request.Content.ReadAsStringAsync());
             }
 
             var mac = HawkCrypto.CalculateMac(_credential.Key, timestamp, nonce, request.Method.Method, request.RequestUri.PathAndQuery, request.RequestUri.Host, request.RequestUri.Port, hash, ext);
