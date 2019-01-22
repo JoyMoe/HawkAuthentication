@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HawkAuthentication.AspNetCore", "HawkAuthentication.AspNetCore\HawkAuthentication.AspNetCore.csproj", "{29AE7803-12E0-41B2-8BA0-0B22F0428F13}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{1CE2B8A6-184E-4600-88CE-CCBDE94E4E01}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HawkAuthentication", "HawkAuthentication\HawkAuthentication.csproj", "{C079F333-0D47-424E-9B9D-B7D47F4D4A1C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HawkAuthentication.Client", "HawkAuthentication.Client\HawkAuthentication.Client.csproj", "{49470AA4-9881-4806-AF15-77F6657103E6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{29AE7803-12E0-41B2-8BA0-0B22F0428F13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29AE7803-12E0-41B2-8BA0-0B22F0428F13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29AE7803-12E0-41B2-8BA0-0B22F0428F13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29AE7803-12E0-41B2-8BA0-0B22F0428F13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C079F333-0D47-424E-9B9D-B7D47F4D4A1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C079F333-0D47-424E-9B9D-B7D47F4D4A1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C079F333-0D47-424E-9B9D-B7D47F4D4A1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C079F333-0D47-424E-9B9D-B7D47F4D4A1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49470AA4-9881-4806-AF15-77F6657103E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49470AA4-9881-4806-AF15-77F6657103E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49470AA4-9881-4806-AF15-77F6657103E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49470AA4-9881-4806-AF15-77F6657103E6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{29AE7803-12E0-41B2-8BA0-0B22F0428F13} = {1CE2B8A6-184E-4600-88CE-CCBDE94E4E01}
+		{C079F333-0D47-424E-9B9D-B7D47F4D4A1C} = {1CE2B8A6-184E-4600-88CE-CCBDE94E4E01}
+		{49470AA4-9881-4806-AF15-77F6657103E6} = {1CE2B8A6-184E-4600-88CE-CCBDE94E4E01}
+	EndGlobalSection
+EndGlobal
