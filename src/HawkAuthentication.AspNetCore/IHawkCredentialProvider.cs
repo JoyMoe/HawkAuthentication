@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 
 namespace HawkAuthentication.AspNetCore
 {
-    public interface IHawkAuthenticationKeyProvider
+    public interface IHawkCredentialProvider
     {
         Task<HawkCredential> GetKeyByKeyIdAsync(string keyId);
     }

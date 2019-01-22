@@ -15,7 +15,7 @@ namespace HawkAuthentication.AspNetCore
 {
     public class HawkAuthenticationHandler : AuthenticationHandler<HawkAuthenticationOptions>
     {
-        private readonly IHawkAuthenticationKeyProvider _keyProvider;
+        private readonly IHawkCredentialProvider _keyProvider;
 
         private readonly List<string> _additionalProperties = new List<string>();
 
@@ -24,7 +24,7 @@ namespace HawkAuthentication.AspNetCore
             ILoggerFactory logger,
             UrlEncoder encoder,
             ISystemClock clock,
-            IHawkAuthenticationKeyProvider keyProvider) : base(options, logger, encoder, clock)
+            IHawkCredentialProvider keyProvider) : base(options, logger, encoder, clock)
         {
             _keyProvider = keyProvider;
         }
