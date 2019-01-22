@@ -13,7 +13,7 @@ namespace HawkAuthentication.Client
             _credential = credential;
         }
 
-        public async Task<HttpRequestMessage> SignAsync(HttpRequestMessage request, string contentType = null, string ext = null)
+        public async Task<HttpRequestMessage> SignAsync(HttpRequestMessage request, string contentType = null, string ext = null, bool requirePayloadHash = false)
         {
             if (request == null)
             {
@@ -29,7 +29,7 @@ namespace HawkAuthentication.Client
             var nonce = HawkCrypto.RandomString();
             var hash = "";
 
-            if (_credential.RequirePayloadHash)
+            if (requirePayloadHash || _credential.RequirePayloadHash)
             {
                 if (string.IsNullOrWhiteSpace(contentType))
                 {
