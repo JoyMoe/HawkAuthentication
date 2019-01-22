@@ -1,12 +1,16 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HawkAuthentication.AspNetCore", "HawkAuthentication.AspNetCore\HawkAuthentication.AspNetCore.csproj", "{29AE7803-12E0-41B2-8BA0-0B22F0428F13}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{1CE2B8A6-184E-4600-88CE-CCBDE94E4E01}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HawkAuthentication", "HawkAuthentication\HawkAuthentication.csproj", "{C079F333-0D47-424E-9B9D-B7D47F4D4A1C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HawkAuthentication", "src\HawkAuthentication\HawkAuthentication.csproj", "{691CEF06-89F4-468C-9295-09D0A98C6CC1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HawkAuthentication.Client", "HawkAuthentication.Client\HawkAuthentication.Client.csproj", "{49470AA4-9881-4806-AF15-77F6657103E6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HawkAuthentication.AspNetCore", "src\HawkAuthentication.AspNetCore\HawkAuthentication.AspNetCore.csproj", "{7148A285-DF95-4EF7-8DC9-DE1527C94206}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HawkAuthentication.Client", "src\HawkAuthentication.Client\HawkAuthentication.Client.csproj", "{59ECEE40-DC81-4D62-8E26-514EB16F8EB2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{D84F4C4C-F0A5-4EA5-805C-D9BE96D8334A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HawkAuthentication.Tests", "tests\HawkAuthentication.Tests\HawkAuthentication.Tests.csproj", "{D2B7C343-8E8F-4F97-8905-2FD6551452EE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -14,22 +18,27 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{29AE7803-12E0-41B2-8BA0-0B22F0428F13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{29AE7803-12E0-41B2-8BA0-0B22F0428F13}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{29AE7803-12E0-41B2-8BA0-0B22F0428F13}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{29AE7803-12E0-41B2-8BA0-0B22F0428F13}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C079F333-0D47-424E-9B9D-B7D47F4D4A1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C079F333-0D47-424E-9B9D-B7D47F4D4A1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C079F333-0D47-424E-9B9D-B7D47F4D4A1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C079F333-0D47-424E-9B9D-B7D47F4D4A1C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{49470AA4-9881-4806-AF15-77F6657103E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{49470AA4-9881-4806-AF15-77F6657103E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{49470AA4-9881-4806-AF15-77F6657103E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{49470AA4-9881-4806-AF15-77F6657103E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{691CEF06-89F4-468C-9295-09D0A98C6CC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{691CEF06-89F4-468C-9295-09D0A98C6CC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{691CEF06-89F4-468C-9295-09D0A98C6CC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{691CEF06-89F4-468C-9295-09D0A98C6CC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7148A285-DF95-4EF7-8DC9-DE1527C94206}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7148A285-DF95-4EF7-8DC9-DE1527C94206}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7148A285-DF95-4EF7-8DC9-DE1527C94206}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7148A285-DF95-4EF7-8DC9-DE1527C94206}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59ECEE40-DC81-4D62-8E26-514EB16F8EB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59ECEE40-DC81-4D62-8E26-514EB16F8EB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59ECEE40-DC81-4D62-8E26-514EB16F8EB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59ECEE40-DC81-4D62-8E26-514EB16F8EB2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2B7C343-8E8F-4F97-8905-2FD6551452EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2B7C343-8E8F-4F97-8905-2FD6551452EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2B7C343-8E8F-4F97-8905-2FD6551452EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2B7C343-8E8F-4F97-8905-2FD6551452EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{29AE7803-12E0-41B2-8BA0-0B22F0428F13} = {1CE2B8A6-184E-4600-88CE-CCBDE94E4E01}
-		{C079F333-0D47-424E-9B9D-B7D47F4D4A1C} = {1CE2B8A6-184E-4600-88CE-CCBDE94E4E01}
-		{49470AA4-9881-4806-AF15-77F6657103E6} = {1CE2B8A6-184E-4600-88CE-CCBDE94E4E01}
+		{691CEF06-89F4-468C-9295-09D0A98C6CC1} = {1CE2B8A6-184E-4600-88CE-CCBDE94E4E01}
+		{7148A285-DF95-4EF7-8DC9-DE1527C94206} = {1CE2B8A6-184E-4600-88CE-CCBDE94E4E01}
+		{59ECEE40-DC81-4D62-8E26-514EB16F8EB2} = {1CE2B8A6-184E-4600-88CE-CCBDE94E4E01}
+		{D2B7C343-8E8F-4F97-8905-2FD6551452EE} = {D84F4C4C-F0A5-4EA5-805C-D9BE96D8334A}
 	EndGlobalSection
 EndGlobal
