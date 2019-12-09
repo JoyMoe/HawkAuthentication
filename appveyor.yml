@@ -23,7 +23,7 @@ deploy:
     api_key:
       secure: cZD/WgvVPXmCIrra1/N+WOb5QhrWBOef2ymP+QK7m+1DPvAr+KeJve0GtKe9dBQy
     on:
-      branch: master
+      branch: develop
   - provider: NuGet
     api_key:
       secure: cZD/WgvVPXmCIrra1/N+WOb5QhrWBOef2ymP+QK7m+1DPvAr+KeJve0GtKe9dBQy
