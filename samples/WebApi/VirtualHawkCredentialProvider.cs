@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using HawkAuthentication;
 using HawkAuthentication.AspNetCore;
 
-namespace WebApi.Services
+namespace WebApi
 {
     public class VirtualHawkCredentialProvider : IHawkCredentialProvider
     {
