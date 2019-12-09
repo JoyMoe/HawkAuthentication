@@ -10,6 +10,8 @@ dotnet_csproj:
   version: '{version}'
   package_version: '{version}'
 configuration: Release
+before_build:
+  - appveyor-retry dotnet restore -v Minimal
 build:
   parallel: true
   publish_nuget: true
