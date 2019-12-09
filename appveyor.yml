@@ -21,19 +21,18 @@ build:
 deploy:
   - provider: NuGet
     api_key:
-      secure: cZD/WgvVPXmCIrra1/N+WOb5QhrWBOef2ymP+QK7m+1DPvAr+KeJve0GtKe9dBQy
+      secure: lLj2XTUV2nkuG3rliJZwy3lylL94HnqTjRKDxLeXNn/dEW/qVR5UaO119sbeYbMb
     on:
       branch: develop
   - provider: NuGet
     api_key:
-      secure: cZD/WgvVPXmCIrra1/N+WOb5QhrWBOef2ymP+QK7m+1DPvAr+KeJve0GtKe9dBQy
+      secure: lLj2XTUV2nkuG3rliJZwy3lylL94HnqTjRKDxLeXNn/dEW/qVR5UaO119sbeYbMb
     on:
       appveyor_repo_tag: true
   - provider: GitHub
     description: AppVeyor CI deployment
     auth_token:
-      secure: 49h1/SXggw6sDLDix121vnZO1XeUqNJkKUDEwx+QdHQJzEJwO2bgRqOs6HPNDExh
-    artifact: HawkAuthentication
+      secure: IApJWoucWEA6qjZn1atyOtaEMbBJVMcs8r4AeTwX3yOPWYK76w6VzOpzG+eTainp
     draft: false
     prerelease: false
     force_update: true
