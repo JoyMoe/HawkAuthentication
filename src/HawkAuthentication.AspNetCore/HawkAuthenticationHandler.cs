@@ -62,7 +62,7 @@ namespace HawkAuthentication.AspNetCore
                 return AuthenticateResult.Fail("Missing HAWK parameter");
             }
 
-            var credential = await _keyProvider.GetKeyByKeyIdAsync(Context, keyValuePairs["id"]);
+            var credential = await _keyProvider.GetKeyByKeyIdAsync(keyValuePairs["id"]);
             if (credential == null)
             {
                 return AuthenticateResult.Fail("Invalid credentials");
