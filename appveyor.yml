@@ -21,12 +21,12 @@ build:
 deploy:
   - provider: NuGet
     api_key:
-      secure: lLj2XTUV2nkuG3rliJZwy3lylL94HnqTjRKDxLeXNn/dEW/qVR5UaO119sbeYbMb
+      secure: 7s1NSddX85xUbOlMQS4euG1QqvqenqboRFNQJ0CJwHwA00SYDFBK8U6VuxMqyiP5
     on:
       branch: develop
   - provider: NuGet
     api_key:
-      secure: lLj2XTUV2nkuG3rliJZwy3lylL94HnqTjRKDxLeXNn/dEW/qVR5UaO119sbeYbMb
+      secure: 7s1NSddX85xUbOlMQS4euG1QqvqenqboRFNQJ0CJwHwA00SYDFBK8U6VuxMqyiP5
     on:
       appveyor_repo_tag: true
   - provider: GitHub
