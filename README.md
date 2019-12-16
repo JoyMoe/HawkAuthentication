@@ -4,7 +4,7 @@ HAWK Authentication Handler and Client Helper for .Net Core
 
 [![AppVeyor](https://img.shields.io/appveyor/ci/JoyMoe/hawkauthentication.svg)](https://ci.appveyor.com/project/JoyMoe/hawkauthentication)
 [![license](https://img.shields.io/github/license/JoyMoe/HawkAuthentication.svg)](https://github.com/JoyMoe/HawkAuthentication/blob/master/LICENSE)
-![netstandard2.1](https://img.shields.io/badge/.Net-netstandard2.1-brightgreen.svg)
+![netstandard2.0](https://img.shields.io/badge/.Net-netstandard2.0-brightgreen.svg)
 
 ## Packages
 

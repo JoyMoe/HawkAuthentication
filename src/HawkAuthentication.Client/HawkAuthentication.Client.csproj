@@ -5,7 +5,7 @@
         <Description>Hawk authentication client library for .NET Core.</Description>
         <PackageTags>authentication;hawk</PackageTags>
 
-        <TargetFramework>netstandard2.1</TargetFramework>
+        <TargetFramework>netstandard2.0</TargetFramework>
 
         <AssemblyName>JoyMoe.HawkAuthentication.Client</AssemblyName>
         <RootNamespace>HawkAuthentication.Client</RootNamespace>
