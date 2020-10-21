@@ -2,7 +2,7 @@ using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace HawkAuthentication.Client
+namespace JoyMoe.HawkAuthentication.Client
 {
     public class HawkRequestSigner
     {

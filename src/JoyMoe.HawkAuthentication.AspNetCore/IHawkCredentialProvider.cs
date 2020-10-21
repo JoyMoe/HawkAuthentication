@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace HawkAuthentication.AspNetCore
+namespace JoyMoe.HawkAuthentication.AspNetCore
 {
     public interface IHawkCredentialProvider
     {

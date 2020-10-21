@@ -2,7 +2,7 @@ using System;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace HawkAuthentication
+namespace JoyMoe.HawkAuthentication
 {
     public static class HawkCrypto
     {

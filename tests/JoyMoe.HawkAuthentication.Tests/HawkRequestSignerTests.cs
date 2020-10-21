@@ -2,10 +2,10 @@ using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using FluentAssertions;
-using HawkAuthentication.Client;
+using JoyMoe.HawkAuthentication.Client;
 using Xunit;
 
-namespace HawkAuthentication.Tests
+namespace JoyMoe.HawkAuthentication.Tests
 {
     public class HawkRequestSignerTests
     {

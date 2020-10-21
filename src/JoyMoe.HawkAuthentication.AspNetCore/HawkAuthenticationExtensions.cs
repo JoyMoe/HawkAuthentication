@@ -1,7 +1,7 @@
 using System;
 using Microsoft.AspNetCore.Authentication;
 
-namespace HawkAuthentication.AspNetCore
+namespace JoyMoe.HawkAuthentication.AspNetCore
 {
     public static class HawkAuthenticationExtensions
     {

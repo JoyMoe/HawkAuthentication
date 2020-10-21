@@ -1,4 +1,4 @@
-namespace HawkAuthentication
+namespace JoyMoe.HawkAuthentication
 {
     public class HawkCredential
     {

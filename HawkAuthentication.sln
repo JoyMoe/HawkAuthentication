@@ -2,15 +2,15 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{1CE2B8A6-184E-4600-88CE-CCBDE94E4E01}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HawkAuthentication", "src\HawkAuthentication\HawkAuthentication.csproj", "{691CEF06-89F4-468C-9295-09D0A98C6CC1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HawkAuthentication", "src\JoyMoe.HawkAuthentication\JoyMoe.HawkAuthentication.csproj", "{691CEF06-89F4-468C-9295-09D0A98C6CC1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HawkAuthentication.AspNetCore", "src\HawkAuthentication.AspNetCore\HawkAuthentication.AspNetCore.csproj", "{7148A285-DF95-4EF7-8DC9-DE1527C94206}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HawkAuthentication.AspNetCore", "src\JoyMoe.HawkAuthentication.AspNetCore\JoyMoe.HawkAuthentication.AspNetCore.csproj", "{7148A285-DF95-4EF7-8DC9-DE1527C94206}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HawkAuthentication.Client", "src\HawkAuthentication.Client\HawkAuthentication.Client.csproj", "{59ECEE40-DC81-4D62-8E26-514EB16F8EB2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HawkAuthentication.Client", "src\JoyMoe.HawkAuthentication.Client\JoyMoe.HawkAuthentication.Client.csproj", "{59ECEE40-DC81-4D62-8E26-514EB16F8EB2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{D84F4C4C-F0A5-4EA5-805C-D9BE96D8334A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HawkAuthentication.Tests", "tests\HawkAuthentication.Tests\HawkAuthentication.Tests.csproj", "{D2B7C343-8E8F-4F97-8905-2FD6551452EE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HawkAuthentication.Tests", "tests\JoyMoe.HawkAuthentication.Tests\JoyMoe.HawkAuthentication.Tests.csproj", "{D2B7C343-8E8F-4F97-8905-2FD6551452EE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

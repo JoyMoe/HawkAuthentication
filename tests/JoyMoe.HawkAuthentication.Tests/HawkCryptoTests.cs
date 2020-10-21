@@ -1,7 +1,7 @@
 using FluentAssertions;
 using Xunit;
 
-namespace HawkAuthentication.Tests
+namespace JoyMoe.HawkAuthentication.Tests
 {
     public class HawkCryptoTests
     {

@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace HawkAuthentication.AspNetCore
+namespace JoyMoe.HawkAuthentication.AspNetCore
 {
     public class HawkAuthenticationHandler : AuthenticationHandler<HawkAuthenticationOptions>
     {

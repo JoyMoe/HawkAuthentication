@@ -1,4 +1,4 @@
-namespace HawkAuthentication
+namespace JoyMoe.HawkAuthentication
 {
     public static class HawkConstants
     {
