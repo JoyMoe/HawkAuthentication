@@ -1,22 +1,17 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <Authors>Chino Chang</Authors>
-        <Description>Hawk authentication client library for .NET Core.</Description>
-        <PackageTags>authentication;hawk</PackageTags>
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
 
-        <TargetFramework>netstandard2.0</TargetFramework>
+  <PropertyGroup>
+    <Authors>Chino Chang</Authors>
+    <Description>Hawk authentication client library for .NET Core.</Description>
+    <PackageTags>authentication;hawk;hmac</PackageTags>
+  </PropertyGroup>
 
-        <AssemblyName>JoyMoe.HawkAuthentication.Client</AssemblyName>
-        <RootNamespace>HawkAuthentication.Client</RootNamespace>
-
-        <IsPackable>true</IsPackable>
-        <IncludeSymbols>true</IncludeSymbols>
-        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-    </PropertyGroup>
-
-    <ItemGroup>
-        <ProjectReference Include="..\HawkAuthentication\HawkAuthentication.csproj" />
-    </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HawkAuthentication\HawkAuthentication.csproj" />
+  </ItemGroup>
 
 </Project>

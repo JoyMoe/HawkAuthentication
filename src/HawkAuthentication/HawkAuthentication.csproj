@@ -1,18 +1,13 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <Authors>Chino Chang</Authors>
-        <Description>Hawk authentication implementation for .NET Core, see JoyMoe.HawkAuthentication.AspNetCore for authentication middleware and JoyMoe.HawkAuthentication.Client for client helper.</Description>
-        <PackageTags>authentication;hawk</PackageTags>
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+  </PropertyGroup>
 
-        <TargetFramework>netstandard2.0</TargetFramework>
-
-        <AssemblyName>JoyMoe.HawkAuthentication</AssemblyName>
-        <RootNamespace>HawkAuthentication</RootNamespace>
-
-        <IsPackable>true</IsPackable>
-        <IncludeSymbols>true</IncludeSymbols>
-        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-    </PropertyGroup>
+  <PropertyGroup>
+    <Authors>Chino Chang</Authors>
+    <Description>Hawk authentication implementation for .NET Core, see JoyMoe.HawkAuthentication.AspNetCore for authentication middleware and JoyMoe.HawkAuthentication.Client for client helper.</Description>
+    <PackageTags>authentication;hawk;hmac</PackageTags>
+  </PropertyGroup>
 
 </Project>

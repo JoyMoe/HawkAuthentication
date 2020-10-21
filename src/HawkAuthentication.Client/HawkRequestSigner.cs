@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -13,17 +13,14 @@ namespace HawkAuthentication.Client
             _credential = credential;
         }
 
-        public async Task<HttpRequestMessage> SignAsync(HttpRequestMessage request, string contentType = null, string ext = null, bool requirePayloadHash = false)
+        public async Task SignAsync(HttpRequestMessage request, string? contentType = null, string? ext = null, bool requirePayloadHash = false)
         {
             if (request == null)
             {
                 throw new ArgumentNullException(nameof(request));
             }
 
-            if (request.Headers.Host == null)
-            {
-                request.Headers.Host = request.RequestUri.Host;
-            }
+            request.Headers.Host ??= request.RequestUri?.Host;
 
             var timestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
             var nonce = HawkCrypto.RandomString();
@@ -31,12 +28,22 @@ namespace HawkAuthentication.Client
 
             if (requirePayloadHash || _credential.RequirePayloadHash)
             {
+                if (request.Content == null)
+                {
+                    throw new ArgumentNullException(nameof(request));
+                }
+
                 if (string.IsNullOrWhiteSpace(contentType))
                 {
                     throw new ArgumentNullException(nameof(contentType));
                 }
 
-                hash = HawkCrypto.CalculatePayloadHash(contentType, await request.Content.ReadAsStringAsync());
+                hash = HawkCrypto.CalculatePayloadHash(contentType, await request.Content.ReadAsStringAsync().ConfigureAwait(false));
+            }
+
+            if (request.RequestUri == null)
+            {
+                throw new NullReferenceException();
             }
 
             var mac = HawkCrypto.CalculateMac(_credential.Key, timestamp, nonce, request.Method.Method, request.RequestUri.PathAndQuery, request.RequestUri.Host, request.RequestUri.Port, hash, ext);
@@ -49,8 +56,6 @@ namespace HawkAuthentication.Client
                          $"mac=\"{mac}\"";
 
             request.Headers.TryAddWithoutValidation("Authorization", header);
-
-            return request;
         }
     }
 }

@@ -4,6 +4,6 @@ namespace HawkAuthentication.AspNetCore
 {
     public interface IHawkCredentialProvider
     {
-        Task<HawkCredential> GetKeyByKeyIdAsync(string keyId);
+        Task<HawkCredential?> GetKeyByKeyIdAsync(string keyId);
     }
 }

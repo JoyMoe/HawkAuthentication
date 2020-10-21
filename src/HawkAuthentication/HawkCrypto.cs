@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -8,19 +8,16 @@ namespace HawkAuthentication
     {
         public static string RandomString(int bytes = 20)
         {
-            using (var provider = new RNGCryptoServiceProvider()) {
-                var byteArray = new byte[bytes];
-                provider.GetBytes(byteArray);
-                return Convert.ToBase64String(byteArray);
-            }
+            using var provider = new RNGCryptoServiceProvider();
+            var byteArray = new byte[bytes];
+            provider.GetBytes(byteArray);
+            return Convert.ToBase64String(byteArray);
         }
 
         public static string CalculateHmac(string key, string plaintext)
         {
-            using (var hash = new HMACSHA256(Encoding.UTF8.GetBytes(key)))
-            {
-                return Convert.ToBase64String(hash.ComputeHash(Encoding.UTF8.GetBytes(plaintext)));
-            }
+            using var hash = new HMACSHA256(Encoding.UTF8.GetBytes(key));
+            return Convert.ToBase64String(hash.ComputeHash(Encoding.UTF8.GetBytes(plaintext)));
         }
 
         public static string CalculatePayloadHash(string contentType, string payload)
@@ -29,18 +26,21 @@ namespace HawkAuthentication
                                     $"{contentType}\n" +
                                     $"{payload}\n";
 
-            using (var hash = SHA256.Create())
-            {
-                return Convert.ToBase64String(hash.ComputeHash(Encoding.UTF8.GetBytes(normalizedPayload)));
-            }
+            using var hash = SHA256.Create();
+            return Convert.ToBase64String(hash.ComputeHash(Encoding.UTF8.GetBytes(normalizedPayload)));
         }
 
-        public static string CalculateMac(string key, long ts, string nonce, string method, string query, string hostname, int port, string hash = null, string ext = null)
+        public static string CalculateMac(string key, long ts, string nonce, string method, string query, string hostname, int port, string? hash = null, string? ext = null)
         {
+            if (method == null)
+            {
+                throw new NullReferenceException(nameof(method));
+            }
+
             var normalizedRequest = $"{HawkConstants.HeaderPrefix}.{HawkConstants.Version}.header\n" +
                                     $"{ts}\n" +
                                     $"{nonce}\n" +
-                                    $"{method.ToUpper()}\n" +
+                                    $"{method.ToUpperInvariant()}\n" +
                                     $"{query}\n" +
                                     $"{hostname}\n" +
                                     $"{port}\n" +

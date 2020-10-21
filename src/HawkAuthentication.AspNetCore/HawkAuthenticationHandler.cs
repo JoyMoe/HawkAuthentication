@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net.Http.Headers;
@@ -37,13 +38,13 @@ namespace HawkAuthentication.AspNetCore
                 return AuthenticateResult.NoResult();
             }
 
-            if(!AuthenticationHeaderValue.TryParse(Request.Headers["Authorization"], out AuthenticationHeaderValue headerValue))
+            if(!AuthenticationHeaderValue.TryParse(Request.Headers["Authorization"], out var headerValue))
             {
                 //Invalid Authorization header
                 return AuthenticateResult.NoResult();
             }
 
-            if(!"Hawk".Equals(headerValue.Scheme, StringComparison.OrdinalIgnoreCase))
+            if(!"Hawk".Equals(headerValue.Scheme, StringComparison.OrdinalIgnoreCase) || headerValue.Parameter == null)
             {
                 //Not Basic authentication header
                 return AuthenticateResult.NoResult();
@@ -62,13 +63,13 @@ namespace HawkAuthentication.AspNetCore
                 return AuthenticateResult.Fail("Missing HAWK parameter");
             }
 
-            var credential = await _keyProvider.GetKeyByKeyIdAsync(keyValuePairs["id"]);
+            var credential = await _keyProvider.GetKeyByKeyIdAsync(keyValuePairs["id"]).ConfigureAwait(false);
             if (credential == null)
             {
                 return AuthenticateResult.Fail("Invalid credentials");
             }
 
-            long.TryParse(keyValuePairs["ts"], out var ts);
+            _ = long.TryParse(keyValuePairs["ts"], out var ts);
             var timestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
             if (timestamp - ts > Options.TimestampSkewSec) {
                 _additionalProperties.Add($"ts=\"{timestamp}\"");
@@ -84,13 +85,12 @@ namespace HawkAuthentication.AspNetCore
 
             if (!string.IsNullOrWhiteSpace(hash))
             {
-                using (var stream = new StreamReader(Context.Request.Body))
+                using var stream = new StreamReader(Context.Request.Body);
+
+                var payloadHash = HawkCrypto.CalculatePayloadHash(Context.Request.ContentType, await stream.ReadToEndAsync().ConfigureAwait(false));
+                if (payloadHash != hash)
                 {
-                    var payloadHash = HawkCrypto.CalculatePayloadHash(Context.Request.ContentType, stream.ReadToEnd());
-                    if (payloadHash != hash)
-                    {
-                        return AuthenticateResult.Fail("Bad payload hash");
-                    }
+                    return AuthenticateResult.Fail("Bad payload hash");
                 }
             }
             else
@@ -102,7 +102,7 @@ namespace HawkAuthentication.AspNetCore
             }
 
             var port = Request.Host.Port ?? Context.Connection.LocalPort;
-            var mac = HawkCrypto.CalculateMac(credential.Key, long.Parse(keyValuePairs["ts"]), keyValuePairs["nonce"], Context.Request.Method, Context.Request.Path + Context.Request.QueryString, Context.Request.Host.Host, port, hash, ext);
+            var mac = HawkCrypto.CalculateMac(credential.Key, long.Parse(keyValuePairs["ts"], CultureInfo.InvariantCulture), keyValuePairs["nonce"], Context.Request.Method, Context.Request.Path + Context.Request.QueryString, Context.Request.Host.Host, port, hash, ext);
             if (mac != keyValuePairs["mac"])
             {
                 return AuthenticateResult.Fail("Bad mac");
@@ -119,7 +119,7 @@ namespace HawkAuthentication.AspNetCore
         {
             Response.Headers["WWW-Authenticate"] = $"{HawkConstants.AuthenticationScheme} {string.Join(", ", _additionalProperties)}".Trim();
 
-            await base.HandleChallengeAsync(properties);
+            await base.HandleChallengeAsync(properties).ConfigureAwait(false);
         }
     }
 }

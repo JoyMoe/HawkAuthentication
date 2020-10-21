@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Microsoft.AspNetCore.Authentication;
 
 namespace HawkAuthentication.AspNetCore
@@ -21,6 +21,11 @@ namespace HawkAuthentication.AspNetCore
             this AuthenticationBuilder builder, string scheme,
             Action<HawkAuthenticationOptions> configuration)
         {
+            if (builder == null)
+            {
+                throw new NullReferenceException(nameof(builder));
+            }
+
             return builder.AddScheme<HawkAuthenticationOptions, HawkAuthenticationHandler>(scheme, configuration);
         }
     }

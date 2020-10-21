@@ -1,0 +1,9 @@
+<Project>
+
+  <ItemGroup>
+    <PackageReference Update="FluentAssertions" Version="5.10.3" />
+    <PackageReference Update="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.3.0" />
+    <PackageReference Update="Microsoft.NetCore.Analyzers" Version="3.3.0" />
+  </ItemGroup>
+
+</Project>
