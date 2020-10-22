@@ -39,7 +39,7 @@ namespace JoyMoe.HawkAuthentication.AspNetCore
             {
                 signature = HawkSignature.Parse(Request.Headers["Authorization"]);
             }
-            catch (Exception e)
+            catch (ArgumentException e)
             {
                 return AuthenticateResult.Fail(e.Message);
             }
