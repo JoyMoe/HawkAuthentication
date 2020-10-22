@@ -1,12 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
-using System.Linq;
-using System.Net.Http.Headers;
 using System.Security.Claims;
 using System.Text.Encodings.Web;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Logging;
@@ -16,9 +12,8 @@ namespace JoyMoe.HawkAuthentication.AspNetCore
 {
     public class HawkAuthenticationHandler : AuthenticationHandler<HawkAuthenticationOptions>
     {
-        private readonly IHawkCredentialProvider _keyProvider;
-
         private readonly List<string> _additionalProperties = new List<string>();
+        private readonly IHawkCredentialProvider _keyProvider;
 
         public HawkAuthenticationHandler(
             IOptionsMonitor<HawkAuthenticationOptions> options,
@@ -38,40 +33,26 @@ namespace JoyMoe.HawkAuthentication.AspNetCore
                 return AuthenticateResult.NoResult();
             }
 
-            if(!AuthenticationHeaderValue.TryParse(Request.Headers["Authorization"], out var headerValue))
+            HawkSignature signature;
+
+            try
             {
-                //Invalid Authorization header
-                return AuthenticateResult.NoResult();
+                signature = HawkSignature.Parse(Request.Headers["Authorization"]);
+            }
+            catch (Exception e)
+            {
+                return AuthenticateResult.Fail(e.Message);
             }
 
-            if(!"Hawk".Equals(headerValue.Scheme, StringComparison.OrdinalIgnoreCase) || headerValue.Parameter == null)
-            {
-                //Not Basic authentication header
-                return AuthenticateResult.NoResult();
-            }
-
-            var regex = new Regex("(\\w+)=\"(.*)\"");
-            var keyValuePairs = headerValue.Parameter.Split(',')
-                .Select(p => regex.Match(p))
-                .ToDictionary(m => m.Groups[1].Value, m => m.Groups[2].Value);
-
-            if (!keyValuePairs.ContainsKey("id") ||
-                !keyValuePairs.ContainsKey("ts") ||
-                !keyValuePairs.ContainsKey("nonce") ||
-                !keyValuePairs.ContainsKey("mac"))
-            {
-                return AuthenticateResult.Fail("Missing HAWK parameter");
-            }
-
-            var credential = await _keyProvider.GetKeyByKeyIdAsync(keyValuePairs["id"]).ConfigureAwait(false);
+            var credential = await _keyProvider.GetKeyByKeyIdAsync(signature.KeyId).ConfigureAwait(false);
             if (credential == null)
             {
                 return AuthenticateResult.Fail("Invalid credentials");
             }
 
-            _ = long.TryParse(keyValuePairs["ts"], out var ts);
             var timestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
-            if (timestamp - ts > Options.TimestampSkewSec) {
+            if (timestamp - signature.Timestamp > Options.TimestampSkewSec)
+            {
                 _additionalProperties.Add($"ts=\"{timestamp}\"");
 
                 var tsm = HawkCrypto.CalculateTsMac(credential.Key, timestamp);
@@ -80,15 +61,13 @@ namespace JoyMoe.HawkAuthentication.AspNetCore
                 return AuthenticateResult.Fail("Stale timestamp");
             }
 
-            keyValuePairs.TryGetValue("hash", out var hash);
-            keyValuePairs.TryGetValue("ext", out var ext);
-
-            if (!string.IsNullOrWhiteSpace(hash))
+            if (!string.IsNullOrWhiteSpace(signature.Hash))
             {
                 using var stream = new StreamReader(Context.Request.Body);
 
                 var payloadHash = HawkCrypto.CalculatePayloadHash(Context.Request.ContentType, await stream.ReadToEndAsync().ConfigureAwait(false));
-                if (payloadHash != hash)
+
+                if (payloadHash != signature.Hash)
                 {
                     return AuthenticateResult.Fail("Bad payload hash");
                 }
@@ -102,8 +81,19 @@ namespace JoyMoe.HawkAuthentication.AspNetCore
             }
 
             var port = Request.Host.Port ?? Context.Connection.LocalPort;
-            var mac = HawkCrypto.CalculateMac(credential.Key, long.Parse(keyValuePairs["ts"], CultureInfo.InvariantCulture), keyValuePairs["nonce"], Context.Request.Method, Context.Request.Path + Context.Request.QueryString, Context.Request.Host.Host, port, hash, ext);
-            if (mac != keyValuePairs["mac"])
+            var mac = HawkCrypto.CalculateMac(
+                credential.Key,
+                signature.Timestamp,
+                signature.Nonce,
+                Context.Request.Method,
+                Context.Request.Path + Context.Request.QueryString,
+                Context.Request.Host.Host,
+                port,
+                signature.Hash,
+                signature.Ext
+            );
+
+            if (mac != signature.Mac)
             {
                 return AuthenticateResult.Fail("Bad mac");
             }

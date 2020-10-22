@@ -13,7 +13,7 @@ namespace JoyMoe.HawkAuthentication.Client
             _credential = credential;
         }
 
-        public async Task SignAsync(HttpRequestMessage request, string? contentType = null, string? ext = null, bool requirePayloadHash = false)
+        public async Task SignAsync(HttpRequestMessage request, string? ext = null, bool requirePayloadHash = false)
         {
             if (request == null)
             {
@@ -33,9 +33,10 @@ namespace JoyMoe.HawkAuthentication.Client
                     throw new ArgumentNullException(nameof(request));
                 }
 
+                var contentType = request.Content.Headers.ContentType?.MediaType;
                 if (string.IsNullOrWhiteSpace(contentType))
                 {
-                    throw new ArgumentNullException(nameof(contentType));
+                    throw new NullReferenceException(nameof(contentType));
                 }
 
                 hash = HawkCrypto.CalculatePayloadHash(contentType, await request.Content.ReadAsStringAsync().ConfigureAwait(false));
@@ -48,12 +49,17 @@ namespace JoyMoe.HawkAuthentication.Client
 
             var mac = HawkCrypto.CalculateMac(_credential.Key, timestamp, nonce, request.Method.Method, request.RequestUri.PathAndQuery, request.RequestUri.Host, request.RequestUri.Port, hash, ext);
 
-            var header = $"{HawkConstants.AuthenticationScheme} id=\"{_credential.KeyId}\", " +
-                         $"ts=\"{timestamp}\", " +
-                         $"nonce=\"{nonce}\", " +
-                         (string.IsNullOrWhiteSpace(hash) ? "" : $"hash=\"{hash}\", ") +
-                         (string.IsNullOrWhiteSpace(ext) ? "" : $"ext=\"{ext}\", ") +
-                         $"mac=\"{mac}\"";
+            var signature = new HawkSignature
+            {
+                KeyId = _credential.KeyId,
+                Timestamp = timestamp,
+                Nonce = nonce,
+                Hash = hash,
+                Ext = ext,
+                Mac = mac
+            };
+
+            var header = $"{HawkConstants.AuthenticationScheme} {signature}";
 
             request.Headers.TryAddWithoutValidation("Authorization", header);
         }
