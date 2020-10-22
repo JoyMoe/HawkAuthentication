@@ -49,7 +49,7 @@ namespace JoyMoe.HawkAuthentication
                 var sign = part.IndexOf('=', StringComparison.InvariantCulture);
 
                 var key = part.Substring(0, sign).Trim();
-                var value = part.Substring(sign + 1);
+                var value = part.Substring(sign + 1).Trim('"');
 
                 switch (key)
                 {
