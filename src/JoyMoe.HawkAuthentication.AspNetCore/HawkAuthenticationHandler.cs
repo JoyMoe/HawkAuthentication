@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
@@ -80,15 +81,15 @@ namespace JoyMoe.HawkAuthentication.AspNetCore
                 }
             }
 
-            var port = Request.Host.Port ?? Context.Connection.LocalPort;
+            var url = new Uri(Context.Request.GetDisplayUrl());
             var mac = HawkCrypto.CalculateMac(
                 credential.Key,
                 signature.Timestamp,
                 signature.Nonce,
                 Context.Request.Method,
-                Context.Request.Path + Context.Request.QueryString,
-                Context.Request.Host.Host,
-                port,
+                url.PathAndQuery,
+                url.Host,
+                url.Port,
                 signature.Hash,
                 signature.Ext
             );

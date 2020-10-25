@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.TestHost" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\JoyMoe.HawkAuthentication.AspNetCore\JoyMoe.HawkAuthentication.AspNetCore.csproj" />
+    <ProjectReference Include="..\..\src\JoyMoe.HawkAuthentication.Client\JoyMoe.HawkAuthentication.Client.csproj" />
+  </ItemGroup>
+
+</Project>

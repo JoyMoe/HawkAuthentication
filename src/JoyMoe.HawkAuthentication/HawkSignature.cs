@@ -90,7 +90,7 @@ namespace JoyMoe.HawkAuthentication
 
         public override string ToString()
         {
-            return "id=\"{KeyId}\", " +
+            return $"id=\"{KeyId}\", " +
                    $"ts=\"{Timestamp}\", " +
                    $"nonce=\"{Nonce}\", " +
                    (string.IsNullOrWhiteSpace(Hash) ? "" : $"hash=\"{Hash}\", ") +

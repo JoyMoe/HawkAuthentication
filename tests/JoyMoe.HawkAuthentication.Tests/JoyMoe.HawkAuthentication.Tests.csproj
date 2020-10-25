@@ -5,10 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluentAssertions" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\src\JoyMoe.HawkAuthentication.Client\JoyMoe.HawkAuthentication.Client.csproj" />
     <ProjectReference Include="..\..\src\JoyMoe.HawkAuthentication\JoyMoe.HawkAuthentication.csproj" />
   </ItemGroup>
