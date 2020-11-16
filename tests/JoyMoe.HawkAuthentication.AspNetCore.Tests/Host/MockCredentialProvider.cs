@@ -4,7 +4,7 @@ namespace JoyMoe.HawkAuthentication.AspNetCore.Tests.Host
 {
     public class MockCredentialProvider : IHawkCredentialProvider
     {
-        public static readonly HawkCredential Credential = new HawkCredential
+        public static readonly HawkCredential Credential = new()
         {
             KeyId = "dh37fgj492je",
             Key = "werxhqb98rpaxn39848xrunpaw3489ruxnpa98w4rxn"

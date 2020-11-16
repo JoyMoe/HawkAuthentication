@@ -8,16 +8,11 @@ namespace JoyMoe.HawkAuthentication.Tests
 {
     public class HawkRequestSignerTests
     {
-        private readonly HawkRequestSigner _signer;
-
-        public HawkRequestSignerTests()
+        private readonly HawkRequestSigner _signer = new(new HawkCredential
         {
-            _signer = new HawkRequestSigner(new HawkCredential
-            {
-                KeyId = "dh37fgj492je",
-                Key = "werxhqb98rpaxn39848xrunpaw3489ruxnpa98w4rxn"
-            });
-        }
+            KeyId = "dh37fgj492je",
+            Key = "werxhqb98rpaxn39848xrunpaw3489ruxnpa98w4rxn"
+        });
 
         [Fact]
         public async Task SigningTests()

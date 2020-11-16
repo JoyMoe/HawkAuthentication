@@ -13,7 +13,7 @@ namespace JoyMoe.HawkAuthentication.AspNetCore
 {
     public class HawkAuthenticationHandler : AuthenticationHandler<HawkAuthenticationOptions>
     {
-        private readonly List<string> _additionalProperties = new List<string>();
+        private readonly List<string> _additionalProperties = new();
         private readonly IHawkCredentialProvider _keyProvider;
 
         public HawkAuthenticationHandler(
